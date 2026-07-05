@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CaptionAI History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📜 CaptionAI History</h1>
+
+    <div class="top-buttons">
+
+        <a href="/">
+            <button type="button">
+                🏠 Back to Home
+            </button>
+        </a>
+
+        <a href="/download/txt">
+            <button type="button">
+                📄 Download TXT
+            </button>
+        </a>
+
+        <a href="/download/pdf">
+            <button type="button">
+                📕 Download PDF
+            </button>
+        </a>
+
+    </div>
+
+    <br>
+
+    {% if rows %}
+
+        {% for row in rows %}
+
+        <div class="result-box">
+
+            <h2>📝 Description</h2>
+            <pre>{{ row[1] }}</pre>
+
+            <h2>📱 Platform</h2>
+            <pre>{{ row[2] }}</pre>
+
+            <h2>🎭 Tone</h2>
+            <pre>{{ row[3] }}</pre>
+
+            <h2>✍️ Captions</h2>
+            <pre>{{ row[4] }}</pre>
+
+            <h2>#️⃣ Hashtags</h2>
+            <pre>{{ row[5] }}</pre>
+
+            <h2>📢 Call To Actions</h2>
+            <pre>{{ row[6] }}</pre>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="result-box">
+            <h2>No History Found 📭</h2>
+
+            <p>
+                Generate some captions first and they will appear here.
+            </p>
+
+            <a href="/">
+                <button type="button">
+                    Generate Content
+                </button>
+            </a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

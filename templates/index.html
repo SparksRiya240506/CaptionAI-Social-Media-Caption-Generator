@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CaptionAI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<button id="dark-btn">🌙 Dark Mode</button>
+
+<div class="container">
+
+    <h1>🚀 CaptionAISocialMediaCaptionGenerator</h1>
+    <p>Generate AI-powered captions, hashtags, and CTAs in seconds.</p>
+
+    <div class="top-buttons">
+        <a href="/history">
+            <button type="button">📜 View History</button>
+        </a>
+    </div>
+
+    <form id="captionForm" action="/generate" method="POST">
+
+        <label>Content Description</label>
+
+        <textarea
+            name="description"
+            placeholder="Example: New summer collection of sustainable sunglasses..."
+            required>{{ description if description else '' }}</textarea>
+
+        <label>Select Platform</label>
+
+        <select name="platform">
+            <option value="Instagram">Instagram</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Twitter">Twitter</option>
+        </select>
+
+        <label>Select Tone</label>
+
+        <select name="tone">
+            <option value="Casual">Casual</option>
+            <option value="Professional">Professional</option>
+            <option value="Promotional">Promotional</option>
+            <option value="Funny">Funny</option>
+        </select>
+
+        <button type="submit">
+            ✨ Generate Content
+        </button>
+
+        <div id="loader">
+            <div class="spinner"></div>
+            <p>Generating amazing captions...</p>
+        </div>
+
+    </form>
+
+    {% if captions %}
+
+    <div class="result-box">
+
+        <h2>📝 Captions</h2>
+
+        <pre id="captions">{{ captions }}</pre>
+
+        <button onclick="copyText('captions')">
+            📋 Copy Captions
+        </button>
+
+        <h2>#️⃣ Hashtags</h2>
+
+        <pre id="hashtags">{{ hashtags }}</pre>
+
+        <button onclick="copyText('hashtags')">
+            📋 Copy Hashtags
+        </button>
+
+        <h2>📢 CTAs</h2>
+
+        <pre id="ctas">{{ ctas }}</pre>
+
+        <button onclick="copyText('ctas')">
+            📋 Copy CTAs
+        </button>
+
+    </div>
+
+    {% endif %}
+
+    {% if error %}
+
+    <div class="error-box">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
